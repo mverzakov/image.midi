@@ -4,14 +4,11 @@ services:
   web:
     build: .
     command: sh docker-entrypoint.sh
-      DJANGO_SECRET_KEY: 'mg=p=lh)%lc-yajgu366%4p^*x_ip7)j*%l3*mr6#uptf&^ove'
     volumes:
       - ./:/srv/music
 
   nginx:
-    extends:
-      file: common.yml
-      service: nginx
+    image: nginx:1.10-alpine
     depends_on:
       - web
     volumes:
