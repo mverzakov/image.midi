@@ -32,12 +32,12 @@ def normalize_seq(note_list):
             )
         )
         durations = "{0:b}".format(length)
-        base = 64
+        base = float(64)
         for val in reversed(durations):
             if int(val):
                 result.append(note)
-                result[-1]['duration'] = float(1) / float(base)
-            base /= 2
+                result[-1]['duration'] = 1.0 / base
+            base /= 2.0
     return result
 
 
