@@ -27,7 +27,9 @@ def parse_picture(path_image="test.jpeg", duration_step=5):
         R.append(determine_octave_and_note(i[0]))
         G.append(determine_octave_and_note(i[1]))
         B.append(determine_octave_and_note(i[2]))
-        print(R)
+
+    return R, G, B
 
 
-parse_picture()
+if __name__ == '__main__':
+    parse_picture()
