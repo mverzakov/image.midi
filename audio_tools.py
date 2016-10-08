@@ -1,14 +1,15 @@
 from pyknon.genmidi import Midi
 from pyknon.music import NoteSeq, Note
+from datetime import datetime
 
 
-def make_music(notes_tracks, instruments, name='default.mid', tempo=120):
+def make_music(notes_tracks, instruments, name='default', tempo=120):
     midi = Midi(tempo=tempo,
                 number_tracks=len(notes_tracks),
                 instrument=instruments)
     for i, notes in enumerate(notes_tracks):
         midi.seq_notes(dict_to_notes(notes), track=i)
-    midi.write("midi/{}".format(name))
+    midi.write("midi/{}-{}.midi".format(name, datetime.now()))
 
 
 def dict_to_notes(notes, volume=120):

@@ -2,9 +2,11 @@ from PIL import Image
 
 
 def append_note(note_list, number):
+    NOTES = [0, 2, 4, 7, 9]
+
     note = {
         "octave": number / 64,
-        "note": (number % 64) * 100 / 533,
+        "note": NOTES[(number % 64) * 10 / 128],
         "duration": 1
     }
 
