@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from PIL import Image
 
 
@@ -31,10 +32,10 @@ def normalize_seq(note_list):
             )
         )
         durations = "{0:b}".format(length)
-        base = float(64)
+        base = 16.0
         for val in reversed(durations):
             if int(val):
-                result.append(note)
+                result.append(note.copy())
                 result[-1]['duration'] = 1.0 / base
             base /= 2.0
     return result
@@ -48,6 +49,7 @@ def default_normalize_seq(note_list):
 
 def parse_picture(path_image="test.jpeg", normalize=True):
     im = Image.open(path_image, 'r')
+    im.thumbnail([64, 64], Image.ANTIALIAS)
     pix_val = list(im.getdata())
 
     R = {

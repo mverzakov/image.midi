@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from pyknon.genmidi import Midi
 from pyknon.music import NoteSeq, Note
 from datetime import datetime
