@@ -8,6 +8,7 @@ from datetime import datetime
 
 
 def make_music(notes_tracks, instruments, name='default', tempo=120):
+    """Generate midi file and save it to midi/ folder."""
     midi = Midi(tempo=tempo,
                 number_tracks=len(notes_tracks),
                 instrument=instruments)
@@ -21,6 +22,7 @@ def make_music(notes_tracks, instruments, name='default', tempo=120):
 
 
 def dict_to_notes(notes, volume=120):
+    """Return NoteSeq based on data dict."""
     result = NoteSeq()
     for note in notes:
         pitch = note['note']
@@ -32,10 +34,7 @@ def dict_to_notes(notes, volume=120):
 
 
 def play_music(music_file):
-    """
-    stream music with mixer.music module in blocking manner
-    this will stream the sound from disk while playing
-    """
+    """Stream music with mixer.music module in blocking manner."""
     freq = 44100  # audio CD quality
     bitsize = -16  # unsigned 16 bit
     channels = 2  # 1 is mono, 2 is stereo

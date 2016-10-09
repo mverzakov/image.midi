@@ -3,6 +3,7 @@ from PIL import Image
 
 
 def append_note(note_list, number):
+    """Append note to list or increase previous note duration."""
     notes = [0, 2, 4, 7, 9]
 
     note = {
@@ -24,6 +25,7 @@ def append_note(note_list, number):
 
 
 def normalize_seq(note_list):
+    """Change notes durations based on min_length."""
     result = []
     for note in note_list['seq']:
         length = int(
@@ -42,12 +44,14 @@ def normalize_seq(note_list):
 
 
 def default_normalize_seq(note_list):
+    """Change duration of all notes to 1/8."""
     for note in note_list['seq']:
         note['duration'] = 1.0 / 8.0
     return note_list['seq']
 
 
 def parse_picture(path_image="test.jpeg", normalize=True):
+    """Return list of notes sequences for each of colors."""
     im = Image.open(path_image, 'r')
     im.thumbnail([64, 64], Image.ANTIALIAS)
     pix_val = list(im.getdata())
@@ -76,7 +80,3 @@ def parse_picture(path_image="test.jpeg", normalize=True):
         append_note(B, i[2])
     normalize_func = normalize_seq if normalize else default_normalize_seq
     return [normalize_func(i) for i in R, G, B]
-
-
-if __name__ == '__main__':
-    parse_picture()
