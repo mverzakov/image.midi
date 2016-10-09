@@ -5,15 +5,13 @@ import os
 from audio_tools import make_music, play_music
 from picture_parse import parse_picture
 
+
 def extant_file(x):
-    """
-    'Type' for argparse - checks that file exists but does not open.
-    """
+    """'Type' for argparse - checks that file exists but does not open."""
     if not os.path.exists(x):
-        # Argparse uses the ArgumentTypeError to give a rejection message like:
-        # error: argument input: x does not exist
         raise argparse.ArgumentTypeError("{0} does not exist".format(x))
     return x
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Image to midi converter")

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+import os
 import pygame
+
 from pyknon.genmidi import Midi
 from pyknon.music import NoteSeq, Note
 from datetime import datetime
@@ -11,6 +13,8 @@ def make_music(notes_tracks, instruments, name='default', tempo=120):
                 instrument=instruments)
     for i, notes in enumerate(notes_tracks):
         midi.seq_notes(dict_to_notes(notes), track=i)
+    if not os.path.exists('midi/'):
+        os.makedirs('midi/')
     name = "midi/{}-{}.midi".format(name, datetime.now())
     midi.write(name)
     return name
