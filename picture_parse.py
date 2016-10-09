@@ -14,7 +14,6 @@ def append_note(note_list, number):
         return x["octave"] == y["octave"] and x["note"] == y["note"]
 
     seq = note_list['seq']
-
     if len(seq) and same_note(seq[-1], note):
         seq[-1]["duration"] += 1
     else:
@@ -42,11 +41,9 @@ def normalize_seq(note_list):
 
 
 def default_normalize_seq(note_list):
-    result = []
     for note in note_list['seq']:
-        result.append(note)
-        result[-1]['duration'] = 1.0 / 8.0
-    return result
+        note['duration'] = 1.0 / 8.0
+    return note_list['seq']
 
 
 def parse_picture(path_image="test.jpeg", normalize=True):

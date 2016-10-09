@@ -26,6 +26,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     result = parse_picture(path_image=args.filename, normalize=args.normalize)
     filename = args.filename.split('/')[-1].split('.')[-2]
-    make_music(result, [1, 2, 3], name=filename)
+    make_music(result, [40, 125, 15], name=filename)
 
 
