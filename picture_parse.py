@@ -2,11 +2,11 @@ from PIL import Image
 
 
 def append_note(note_list, number):
-    NOTES = [0, 2, 4, 7, 9]
+    notes = [0, 2, 4, 7, 9]
 
     note = {
-        "octave": number / 64,
-        "note": NOTES[(number % 64) * 10 / 128],
+        "octave": number / 64 + 3,
+        "note": notes[(number % 64) * 10 / 128],
         "duration": 1
     }
 
@@ -41,7 +41,15 @@ def normalize_seq(note_list):
     return result
 
 
-def parse_picture(path_image="test.jpeg", duration_step=5):
+def default_normalize_seq(note_list):
+    result = []
+    for note in note_list['seq']:
+        result.append(note)
+        result[-1]['duration'] = 1.0 / 8.0
+    return result
+
+
+def parse_picture(path_image="test.jpeg", normalize=True):
     im = Image.open(path_image, 'r')
     pix_val = list(im.getdata())
 
@@ -67,8 +75,8 @@ def parse_picture(path_image="test.jpeg", duration_step=5):
         append_note(R, i[0])
         append_note(G, i[1])
         append_note(B, i[2])
-
-    return [normalize_seq(i) for i in R, G, B]
+    normalize_func = normalize_seq if normalize else default_normalize_seq
+    return [normalize_func(i) for i in R, G, B]
 
 
 if __name__ == '__main__':

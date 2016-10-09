@@ -20,10 +20,12 @@ if __name__ == "__main__":
     parser.add_argument("-i", "--input",
         dest="filename", required=True, type=extant_file,
         help="input image file", metavar="FILE")
+    parser.add_argument("--normalize", dest='normalize',
+                        default=False, action="store_true",
+                        help="Flag to normalize")
     args = parser.parse_args()
-
-    result = parse_picture(path_image=args.filename)
+    result = parse_picture(path_image=args.filename, normalize=args.normalize)
     filename = args.filename.split('/')[-1].split('.')[-2]
-    make_music(result, [95, 108, 125], name=filename)
+    make_music(result, [1, 2, 3], name=filename)
 
 
